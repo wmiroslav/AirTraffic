@@ -87,7 +87,7 @@ ul {
   font-size: 1em;
   margin: 0 0 1.5em;
 }
-dd, dt, li {
+li {
   line-height: 1.5;
   margin: 0;
 }
@@ -131,18 +131,6 @@ hr {
 .center {
   text-align: center;
 }
-.left {
-  text-align: left;
-}
-.red {
-  background-color: $red;
-}
-.gray {
-  background-color: $gray;
-}
-.white {
-  background-color: $white;
-}
 
 
 .light {
@@ -169,7 +157,7 @@ button {
 .modal-container {
   position: fixed;
   background: rgba(0,0,0,.5);
-  z-index: 3;
+  z-index: 12;
   width: 100%;
   height: 100%;
   .modal {
@@ -181,7 +169,7 @@ button {
       @include element-shadow;
       max-width: 800px;
       padding: 50px;
-      z-index: 4;
+      z-index: 13;
   }
   .closeBtn {
       position: fixed;
