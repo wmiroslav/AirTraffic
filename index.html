@@ -10,11 +10,42 @@
 
 <body>
 
+    <h1 id="loading-spinner" class="hidden">Loading... please wait...</h1>
     <h1>AirTraffic</h1>
 
+    <div id="selected-airplane" class="hidden">
+        <button id="close-airplane">close</button>
+        <h4>Selected airplane</h4>
+        <h5>Manufacture: <span id="manufacture"></span></h5>
+        <h5>Model: <span id="model"></span></h5>
+        <hr>
+        <h5>Destination: <span id="destination"></span></h5>
+        <h5>Flight origin airport: <span id="origin"></span></h5>
+        <hr>
+        <img id="logo" onerror="this.src='images/companyLogo.png'" src="" />
+    </div>
+    
+    <div id="questionWrapper">
+        <h4 id="question">Enable geolocation?</h4>
+        <button id="allowLocation">Use my location</button>
+        <button id="deniedLocation">Don't use my location</button>
+        <h5 id="warning"></h5>
+    </div>
+
+    <div id="airplanes-container" class="hidden">
+        <h5 class="list-heading">
+            <span>Direction</span>
+            <span>Altitude (ft)</span>
+            <span>Flight code numbe</span>
+        </h5>
+        <ul id='list' class="airplane-list">
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
     <noscript>
-        <h1>Please, enable Javascipt</h1>
+        <h1>Please, enable Javascipt.</h1>
     </noscript>
 </body>
 
