@@ -3,7 +3,7 @@ Show all airplanes that are flying over current location of user using vanilla J
 
 # Instructions
 <ul>
-    <li>npm install</li>
-    <li>npm run build</li>
+    <li>run: npm install</li>
+    <li>run: gulp</li>
     <li>install browser extension to disable CORS</li>
 <ul>

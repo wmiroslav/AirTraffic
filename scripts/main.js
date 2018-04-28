@@ -1,7 +1,6 @@
 "use strict";
 
 
-
 (function() {
 
     var airplanes;
@@ -68,7 +67,7 @@
     // make HTTP erquest to get airplanes
     function getData() {
         setSpinner(true);
-        var url = "AircraftList.json?lat=" + userPosition.coords.latitude + "&lng=" + userPosition.coords.longitude + "&fDstL=0&fDstU=" + config.range;
+        var url = config.baseUrl + "AircraftList.json?lat=" + userPosition.coords.latitude + "&lng=" + userPosition.coords.longitude + "&fDstL=0&fDstU=" + config.range;
         httpGetAsync(url, onSuccessGetData, onErrorGetData)
     }
 
@@ -115,7 +114,7 @@
         }
 
         // if there's results, add them to the DOM
-        airplanes = sortBy(response.acList, "Alt");
+        airplanes = response.acList.sortBy("Alt");
         var numberOfNewAirplanes = airplanes.length;
         if (numberOfNewAirplanes > 0) {
             for (var i = 0; i < numberOfNewAirplanes; i++) {
@@ -236,7 +235,7 @@
         
                 if(selectedAirplane.Op) {
                     var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
-                    var logoUrl = "https://logo.clearbit.com/" + (config.logo[selectedAirplane.Op] || genericUrl);
+                    var logoUrl = config.logoBaseUrl + (config.logo[selectedAirplane.Op] || genericUrl);
                     logo.src = logoUrl;
                 }
                 

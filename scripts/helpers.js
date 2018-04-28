@@ -1,18 +1,17 @@
 "use strict";
 
 
-// sort objects by some property
+// sort array of objects by some property
 // example: sort airplanes by altitude
-function sortBy(array, prop) {
-    return array.sort(function(obj1, obj2) {
+Array.prototype.sortBy = function(prop) {
+    return this.sort(function(obj1, obj2) {
         return obj2[prop] - obj1[prop];
     });
-}
+};
  
 
 // make HTTP GET request
 function httpGetAsync(url, successCallback, errorCallback) {
-    var fullUrl = config.baseUrl + url;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState == 4) {
@@ -23,7 +22,7 @@ function httpGetAsync(url, successCallback, errorCallback) {
             }
         }
     }
-    xmlHttp.open("GET", fullUrl, true); // true for asynchronous 
+    xmlHttp.open("GET", url, true); // true for asynchronous 
     xmlHttp.send(null);
 }
 

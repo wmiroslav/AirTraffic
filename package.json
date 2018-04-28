@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/wmiroslav/AirTraffic#readme",
   "devDependencies": {
-    "node-sass": "^4.9.0"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.0"
   }
 }

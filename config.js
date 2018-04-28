@@ -12,6 +12,7 @@ var config = {
     range: 200,
     dataRefreshTime: 1000 * 60, // 1 min
     baseUrl: "https://public-api.adsbexchange.com/VirtualRadar/",
+    logoBaseUrl: "https://logo.clearbit.com/",
     checkNetworkOrCORS: "Check your internet connection, and enable CORS in your browser.",
     errorOccurred: "An error occurred. Please try searching again.",
     logo: { // exections for logo paths
@@ -23,7 +24,8 @@ var config = {
         "Turkmenistan Airlines": "oilgasturkmenistan.com",
         "Royal Jordanian Airlines": "rj.com",
         "Aegean Airlines": "aegeanair.com",
-        "Air Serbia": "airserbia.info"
+        "Air Serbia": "airserbia.info",
+        "Condor Flugdienst": "condor.com"
     }
 }
 
