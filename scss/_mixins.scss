@@ -86,4 +86,10 @@
     box-shadow: 0 $size ($size * 4) darken($border-color, 3);
 }
 
+@mixin center() {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 

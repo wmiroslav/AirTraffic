@@ -22,7 +22,8 @@ var config = {
         "Norwegian Air International": "norwegian.com",
         "Turkmenistan Airlines": "oilgasturkmenistan.com",
         "Royal Jordanian Airlines": "rj.com",
-        "Aegean Airlines": "aegeanair.com"
+        "Aegean Airlines": "aegeanair.com",
+        "Air Serbia": "airserbia.info"
     }
 }
 

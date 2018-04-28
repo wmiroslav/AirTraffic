@@ -1,0 +1,46 @@
+@import 'mixins';
+
+
+  
+.fadein {
+  @include animation('fadein 0.5s');
+}
+@include keyframes(fadein) {
+  from { 
+    opacity: 0;
+  }
+  to   { 
+    opacity: 1;
+  }
+}
+
+
+.fadein-and-move {
+  @include animation('fadein-and-move 0.6s');
+}
+@include keyframes(fadein-and-move) {
+    from { 
+      opacity: 0;
+      @include transform(translate(0px, 50px));
+    }
+    to   { 
+      opacity: 1;
+      @include transform(translate(0px, 0px));
+    }
+}
+
+.fadein-and-scale {
+  @include animation('fadein-and-scale 0.8s cubic-bezier(.87,-.41,.19,1.44)');
+}
+@include keyframes(fadein-and-scale) {
+  from { 
+    opacity: 0;
+    @include transform(translate(0px, 10px) rotate(5deg) scale(.5, .5));
+  }
+  to   { 
+    opacity: 1;
+    @include transform(translate(0px, 0px) rotate(0deg) scale(1, 1));
+  }
+}
+
+

@@ -1,3 +1,17 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+@import 'mixins';
+
+$main-font: 'Roboto', sans-serif;
+*, h1, h2, h3, h4, h5, h6, p, a, span, button {
+    font-family: $main-font;
+    color: $black;
+}
+
+div, section {
+  box-sizing: border-box;
+}
+
 
 .clearfix:after {
     visibility: hidden;
@@ -12,6 +26,11 @@
   * html .clearfix { height: 1%; }
   .clearfix { display: block; 
 }
+
+.hidden {
+  display: none;
+}
+
 
 
 
@@ -35,7 +54,7 @@ h6, {
 h1 {
   font-size: 3em;
   line-height: 1;
-  margin-bottom: 0.5em;
+  margin-bottom: 1.5em;
   text-align: center;
   margin-top: 1.5em;
 }
@@ -87,6 +106,12 @@ hr {
 }
 
 
+.long-text {
+  overflow:hidden; 
+  white-space:nowrap; 
+  text-overflow: ellipsis;
+}
+
 .container {
   @extend .clearfix;
   max-width: $max-width;
@@ -99,6 +124,9 @@ hr {
 .m-t {
   margin-top: $padding;
 }
+.m-b {
+  margin-bottom: $padding;
+}
 
 .center {
   text-align: center;
@@ -108,9 +136,6 @@ hr {
 }
 .red {
   background-color: $red;
-}
-.blue {
-  background-color: $blue;
 }
 .gray {
   background-color: $gray;
@@ -122,7 +147,49 @@ hr {
 
 .light {
   color: $gray;
-  font-size: .9em;
+}
+
+button {
+  background-color: $white;
+  font-size: 1.1em;
+  padding: $padding-half $padding;
+  @include rounded-corner;
+  border: $border;
+  cursor: pointer;
+  transition: all 0.35s;
+  &:hover {
+    background-color: darken($white, 6);;
+  }
 }
 
 
+
+
+// modal
+.modal-container {
+  position: fixed;
+  background: rgba(0,0,0,.5);
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  .modal {
+      margin: 0 auto;
+      margin-top: 10vh;
+      background-color: white;
+      border: $border;
+      @include rounded-corner;
+      @include element-shadow;
+      max-width: 800px;
+      padding: 50px;
+      z-index: 4;
+  }
+  .closeBtn {
+      position: fixed;
+      top: $padding;
+      right: $padding;
+      width: 50px;
+      height: 50px;
+      @include rounded-corner(2em);
+      @include element-shadow;
+  }
+}

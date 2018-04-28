@@ -10,37 +10,46 @@
 
 <body>
 
-    <h1 id="loading-spinner" class="hidden">Loading... please wait...</h1>
-    <h1>AirTraffic</h1>
+    <div id="loading-spinner" class="lds-ripple hidden"><div></div><div></div></div>
 
-    <div id="selected-airplane" class="hidden">
-        <button id="close-airplane">close</button>
-        <h4>Selected airplane</h4>
-        <h5>Manufacture: <span id="manufacture"></span></h5>
-        <h5>Model: <span id="model"></span></h5>
-        <hr>
-        <h5>Destination: <span id="destination"></span></h5>
-        <h5>Flight origin airport: <span id="origin"></span></h5>
-        <hr>
-        <img id="logo" onerror="this.src='images/noImage.png'" src="" />
-    </div>
-    
-    <div id="questionWrapper">
-        <h4 id="question">Enable geolocation?</h4>
-        <button id="allowLocation">Use my location</button>
-        <button id="deniedLocation">Don't use my location</button>
-        <h5 id="warning"></h5>
-    </div>
+    <section id="selected-airplane" class="hidden modal-container padding">
+        <button id="close-airplane" class="closeBtn">X</button>
+        <div class="modal fadein-and-move">
+            <h3>Manufacture: <span id="manufacture"></span></h3>
+            <h4>Model: <span id="model"></span></h4>
+            <hr>
+            <div class="m-t m-b">
+                <p>Destination: <span id="destination"></span></p>
+                <p>Flight origin airport: <span id="origin"></span></p>
+            </div>
+            <hr>
+            <div class="m-t m-b">
+                <img id="logo" onerror="this.src='images/noImage.png'" src="" />
+            </div>
+        </div>
+    </section>
 
-    <div id="airplanes-container" class="hidden">
-        <h5 class="list-heading">
-            <span>Direction</span>
-            <span>Altitude (ft)</span>
-            <span>Flight code numbe</span>
-        </h5>
-        <ul id='list' class="airplane-list">
-        </ul>
-    </div>
+    <section class="container padding">
+        <h1 class="light fadein">AirTraffic</h1>
+        <div id="questionWrapper" class="center question-wrapper fadein-and-scale">
+            <h4 class="center fadein">Enable geolocation?</h4>
+            <button id="allowLocation">Use my location</button>
+            <button class="warning-btn" id="deniedLocation">Don't use my location</button>
+            <p class="warning-msg light" id="warning"> </p>
+        </div>
+        <div id="airplanes-container" class="hidden">
+            <p class="list-heading">
+                <span class="icon-orientation">Direction</span>
+                <span class="altitude">Altitude</span>
+                <span class="long-text code-number">Flight code numbe</span>
+            </p>
+            <ul id='list' class="airplane-list">
+            </ul>
+        </div>
+    </section>
+
+
+
 
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="scripts/helpers.js"></script>

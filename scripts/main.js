@@ -35,6 +35,7 @@
         var i = Math.floor((Math.random() * numberOfQuestions));
         // ...and show this question to user
         warningGeolocation.innerHTML = config.enableGeolocationQuestion[i];
+        warningGeolocation.classList.add('fadein');
     }
     // when user denied to get location
     geolocationDeniedBtn.addEventListener("click", locationDenied);
@@ -98,6 +99,11 @@
         singleAirplane.setAttribute("style", "display: hidden;");
         window.location.hash = '';
     }
+    singleAirplane.addEventListener('click', function(e){
+        if (e.target.id == 'selected-airplane') {
+            closeModal();
+        }
+    })
     closeBtn.addEventListener('click', closeModal)
 
 
@@ -117,8 +123,8 @@
                 var wrapperLi = document.createElement("li");
                 
                 // create heading wrapper 
-                var wrapperH = document.createElement("h4");
-                wrapperH.setAttribute("data-id", airplanes[i].Id);
+                var wrapperP = document.createElement("p");
+                wrapperP.setAttribute("data-id", airplanes[i].Id);
 
 
                 // add element for icon orientation
@@ -137,18 +143,19 @@
                 codeNumberEl.classList.add("code-number");
 
                 // add new elements to DOM
-                wrapperH.appendChild(iconEl);
-                wrapperH.appendChild(altitudeEl);
-                wrapperH.appendChild(codeNumberEl);
-                wrapperLi.appendChild(wrapperH);
+                wrapperP.appendChild(iconEl);
+                wrapperP.appendChild(altitudeEl);
+                wrapperP.appendChild(codeNumberEl);
+                wrapperLi.appendChild(wrapperP);
                 list.appendChild(wrapperLi);
             }
         } else {
             // create wrapper/row for airplane
+            // todo
             var wrapperLi = document.createElement("li");
-            var wrapperH = document.createElement("h4");
-            wrapperH.innerHTML = config.noAirplanes;
-            wrapperLi.appendChild(wrapperH);
+            var wrapperP = document.createElement("p");
+            wrapperP.innerHTML = config.noAirplanes;
+            wrapperLi.appendChild(wrapperP);
             list.appendChild(wrapperLi);
         }
         setButtonsState(false);
@@ -208,7 +215,6 @@
     // ROUTING
     //////////////
     function getAirplaneData() {
-        window.scrollTo(0,0); // scroll to top when we 'change' the page
         var id = window.location.hash.substr(1); // get ID from URL, from hash
         if (id && airplanes) {
             // find selected airplane
@@ -223,21 +229,23 @@
             if (selectedAirplane && singleAirplane) {
                 singleAirplane.setAttribute("style", "display: block;");
                 console.log(selectedAirplane);
-                manufacture.innerHTML = selectedAirplane.Man;
-                model.innerHTML = selectedAirplane.Mdl;
+                manufacture.innerHTML = selectedAirplane.Man || config.noData;
+                model.innerHTML = selectedAirplane.Mdl || config.noData;
                 origin.innerHTML = selectedAirplane.From || config.noData;
                 destination.innerHTML = selectedAirplane.To || config.noData;
         
-                var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
-                var logoUrl = "https://logo.clearbit.com/" + (config.logo[selectedAirplane.Op] || genericUrl);
-                logo.src = logoUrl;
+                if(selectedAirplane.Op) {
+                    var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
+                    var logoUrl = "https://logo.clearbit.com/" + (config.logo[selectedAirplane.Op] || genericUrl);
+                    logo.src = logoUrl;
+                }
+                
             } else {
                 closeModal();
             }
         } else {
             closeModal();
         }
-        console.log('infinite loop?');
     }
     window.addEventListener('hashchange', getAirplaneData);
     
