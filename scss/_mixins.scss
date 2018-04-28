@@ -1,0 +1,89 @@
+@import 'variables';
+
+
+// ANIMATION MIXINS
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+
+
+@mixin animation-delay($delay) {
+  -webkit-animation-delay: $delay;
+  -moz-animation-delay: $delay;
+  -o-animation-delay: $delay;
+  animation-delay: $delay;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+
+// TRANSFORMATIONS
+@mixin transform-origin($newData) {
+  -webkit-transform-origin: $newData;
+  -moz-transform-origin: $newData;
+  -o-transform-origin: $newData;
+  transform-origin: $newData;
+}
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	transform: $transforms;
+}
+@mixin translate ($x, $y) {
+	@include transform(translate($x, $y));
+}
+@mixin rotate ($deg) { 
+	@include transform(rotateZ(#{$deg}));
+}
+@mixin skew ($x, $y) {
+	@include transform(skew(#{$x}deg, #{$y}deg));
+}
+@mixin scale($scale) {
+	@include transform(scale($scale));
+}
+
+
+// STYLING MIXINS
+@mixin rounded-corner ($size: 5px) {
+    -webkit-border-radius: $size; 
+    -moz-border-radius: $size; 
+    border-radius: $size; 
+}
+
+
+@mixin element-shadow ($multiply: 1) {
+    $size: 4px * $multiply;
+    -webkit-box-shadow: 0 $size ($size * 4) darken($border-color, 3);
+    -moz-box-shadow: 0 $size ($size * 4) darken($border-color, 3);
+    box-shadow: 0 $size ($size * 4) darken($border-color, 3);
+}
+
+

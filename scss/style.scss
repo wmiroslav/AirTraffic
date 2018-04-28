@@ -1,37 +1,5 @@
-.hidden {
-    display: none;
-}
+@import 'reset';
+@import 'main';
 
-.airplane-list {
-    h4 {
-        cursor: pointer;
-    }
-    span {
-        display: inline-block;
-        padding: 5px;
-    }
-    .icon-orientation {
-        &.west:after {
-            content: url('../images/orientation.png');
-            display: inline-block;
-            -webkit-transform: rotate(-60deg);
-            -moz-transform: rotate(-60deg);
-            -o-transform: rotate(-60deg);
-            -ms-transform: rotate(-60deg);
-            transform: rotate(-60deg);
-        }
-        &.east:after {
-            content: url('../images/orientation.png');
-            display: inline-block;
-            -webkit-transform: rotate(60deg);
-            -moz-transform: rotate(60deg);
-            -o-transform: rotate(60deg);
-            -ms-transform: rotate(60deg);
-            transform: rotate(60deg);
-        }
-    }
-    .altitude {
-    }
-    .code-number {
-    }
-}
+
+

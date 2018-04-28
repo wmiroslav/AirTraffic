@@ -1,0 +1,128 @@
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+.clearfix { display: inline-block; }
+  /* start commented backslash hack \*/
+  * html .clearfix { height: 1%; }
+  .clearfix { display: block; 
+}
+
+
+
+a:link {
+    text-decoration: none;
+}
+
+
+html {
+  font-size: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6, {
+  font-weight: bold;
+  margin: 0;
+}
+h1 {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: 0.5em;
+  text-align: center;
+  margin-top: 1.5em;
+}
+h2 {
+  font-size: 2.25em;
+  line-height: 1.3333333333333333;
+  margin-bottom: 0.6666666666666666em;
+}
+h3 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+h4 {
+  font-size: 1.3125em;
+  line-height: 1.1428571428571428;
+  margin-bottom: 1.1428571428571428em;
+}
+h5 {
+  font-size: 1.125em;
+  line-height: 1.3333333333333333;
+  margin-bottom: 1em;
+}
+h6 {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+ul {
+  font-size: 1em;
+  margin: 0 0 1.5em;
+}
+dd, dt, li {
+  line-height: 1.5;
+  margin: 0;
+}
+
+hr {
+  opacity: .3;
+}
+
+
+.padding {
+  padding: $padding;
+}
+
+.padding-half {
+  padding: $padding-half;
+}
+
+
+.container {
+  @extend .clearfix;
+  max-width: $max-width;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+
+.m-t {
+  margin-top: $padding;
+}
+
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.red {
+  background-color: $red;
+}
+.blue {
+  background-color: $blue;
+}
+.gray {
+  background-color: $gray;
+}
+.white {
+  background-color: $white;
+}
+
+
+.light {
+  color: $gray;
+  font-size: .9em;
+}
+
+

@@ -1,0 +1,32 @@
+@import 'variables';
+@import 'mixins';
+
+.hidden {
+    display: none;
+}
+
+.airplane-list {
+    h4 {
+        cursor: pointer;
+    }
+    span {
+        display: inline-block;
+        padding: 5px;
+    }
+    .icon-orientation {
+        &.west:after {
+            content: url('../images/orientation.png');
+            display: inline-block;
+            @include transform(rotate(-60deg));
+        }
+        &.east:after {
+            content: url('../images/orientation.png');
+            display: inline-block;
+            @include transform(rotate(60deg));
+        }
+    }
+    .altitude {
+    }
+    .code-number {
+    }
+}

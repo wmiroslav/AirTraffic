@@ -4,7 +4,6 @@
 
 (function() {
 
-
     var airplanes;
     var userPosition;
     var geolocationAllowBtn = document.getElementById('allowLocation');
@@ -92,47 +91,14 @@
     }
 
 
-    // sort objects by some property
-    // example: sort airplanes by altitude
-    function sortBy(array, prop) {
-        return array.sort(function(obj1, obj2) {
-            return obj2[prop] - obj1[prop];
-        });
-    }
 
-    closeBtn.addEventListener('click', function() {
+
+
+    function closeModal() {
         singleAirplane.setAttribute("style", "display: hidden;");
-    })
-
-    function showAirplaneData(e) {
-        // get airplane ID from DOM
-        var id = e.target.dataset.id || e.target.parentElement.dataset.id;
-        // find selected airplane
-        var selectedAirplane;
-        for (var i = 0, length = airplanes.length; i < length; i++) {
-            if (airplanes[i].Id == id) {
-                selectedAirplane = airplanes[i];
-                break;
-            }
-        }
-        // SHOW selecterd airplane
-        if (selectedAirplane) {
-            singleAirplane.setAttribute("style", "display: block;");
-            console.log(selectedAirplane);
-            manufacture.innerHTML = selectedAirplane.Man;
-            model.innerHTML = selectedAirplane.Mdl;
-            origin.innerHTML = selectedAirplane.From || config.noData;
-            destination.innerHTML = selectedAirplane.To || config.noData;
-
-            var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
-            var logoUrl = "https://logo.clearbit.com/" + (config.logo[selectedAirplane.Op] || genericUrl);
-            logo.src = logoUrl;
-
-        }
-        
+        window.location.hash = '';
     }
-
-    list.addEventListener('click', showAirplaneData, false);
+    closeBtn.addEventListener('click', closeModal)
 
 
     // on successfully retrieve all airplanes
@@ -238,28 +204,57 @@
     }
 
 
-
-    // make HTTP GET request
-    function httpGetAsync(url, successCallback, errorCallback) {
-        var fullUrl = config.baseUrl + url;
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4) {
-                if(xmlHttp.status == 200) {
-                    successCallback(JSON.parse(xmlHttp.responseText));
-                } else {
-                    errorCallback(xmlHttp.status);
+    //////////////
+    // ROUTING
+    //////////////
+    function getAirplaneData() {
+        window.scrollTo(0,0); // scroll to top when we 'change' the page
+        var id = window.location.hash.substr(1); // get ID from URL, from hash
+        if (id && airplanes) {
+            // find selected airplane
+            var selectedAirplane;
+            for (var i = 0, length = airplanes.length; i < length; i++) {
+                if (airplanes[i].Id == id) {
+                    selectedAirplane = airplanes[i];
+                    break;
                 }
             }
+            // SHOW selecterd airplane
+            if (selectedAirplane && singleAirplane) {
+                singleAirplane.setAttribute("style", "display: block;");
+                console.log(selectedAirplane);
+                manufacture.innerHTML = selectedAirplane.Man;
+                model.innerHTML = selectedAirplane.Mdl;
+                origin.innerHTML = selectedAirplane.From || config.noData;
+                destination.innerHTML = selectedAirplane.To || config.noData;
+        
+                var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
+                var logoUrl = "https://logo.clearbit.com/" + (config.logo[selectedAirplane.Op] || genericUrl);
+                logo.src = logoUrl;
+            } else {
+                closeModal();
+            }
+        } else {
+            closeModal();
         }
-        xmlHttp.open("GET", fullUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
+        console.log('infinite loop?');
     }
+    window.addEventListener('hashchange', getAirplaneData);
+    
+    list.addEventListener('click', function(e) {
+        // get airplane ID from DOM
+        var id = e.target.dataset.id || e.target.parentElement.dataset.id;
+        // set url path (hash)
+        window.location.hash = id;
+    }, false);
 
 
 
+   
 
 
+    getAirplaneData(); //on init get data, for now it's pointless, because we don't store our geolocation and last results in local storage...
+                        // so we could use: window.location.hash = ''; just to clean hash value...
 })()
 
 
