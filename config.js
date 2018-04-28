@@ -10,11 +10,11 @@ var config = {
     noAirplanes: "No airplanes in your area",
     noData: "No data",
     range: 200,
-    dataRefreshTime: 1000 * 60, // TODO: 1 min
+    dataRefreshTime: 1000 * 60, // 1 min
     baseUrl: "https://public-api.adsbexchange.com/VirtualRadar/",
-    checkNetwork: "Check your internet connection, and try again.",
+    checkNetworkOrCORS: "Check your internet connection, and enable CORS in your browser.",
     errorOccurred: "An error occurred. Please try searching again.",
-    logo: { // exections logo paths
+    logo: { // exections for logo paths
         "Jet Aviation Flight Services (Malta) Ltd": "jetaviation.com",
         "Jet Time": "jettimes.com",
         "Atlas Air Service AG": "atlasair.com",

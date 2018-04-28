@@ -159,7 +159,6 @@
                 var iconEl = document.createElement("span");
                 iconEl.classList.add("icon-orientation");
                 iconEl.classList.add(getIconOrientation(airplanes[i].Brng));
-                iconEl.innerHTML = airplanes[i].Id;
 
                 // add element for altitude
                 var altitudeEl = document.createElement("span");
@@ -192,9 +191,10 @@
 
     // get data failed
     function onErrorGetData(errorStatus) {
+        setSpinner(false);
         // if user has no internet connection
         if (errorStatus === 0) {
-            alert(config.checkNetwork);
+            alert(config.checkNetworkOrCORS);
         } else {
             // if some other error happened
             alert(config.errorOccurred);
@@ -217,7 +217,7 @@
     function onErrorGetLocation(error) {
         setButtonsState(false);
         if(error.code === 2) {
-            alert(config.checkNetwork);
+            alert(config.checkNetworkOrCORS);
         } else {
             // if user clock geolocation
             locationDenied();
