@@ -11,6 +11,9 @@
     var list = document.getElementById('list');
     var loadingSpinner = document.getElementById('loading-spinner');
     var singleAirplane = document.getElementById('selected-airplane');
+    var toastMessage = document.getElementById('toast');
+    var toastWrapper = document.getElementById('toast-wrapper');
+    toastWrapper.setAttribute("style", "display: none");
     // for selected airplane
     var closeBtn = document.getElementById('close-airplane');
     var manufacture = document.getElementById('manufacture');
@@ -95,7 +98,7 @@
 
 
     function closeModal() {
-        singleAirplane.setAttribute("style", "display: hidden;");
+        singleAirplane.setAttribute("style", "display: none;");
         window.location.hash = '';
     }
     singleAirplane.addEventListener('click', function(e){
@@ -149,13 +152,7 @@
                 list.appendChild(wrapperLi);
             }
         } else {
-            // create wrapper/row for airplane
-            // todo
-            var wrapperLi = document.createElement("li");
-            var wrapperP = document.createElement("p");
-            wrapperP.innerHTML = config.noAirplanes;
-            wrapperLi.appendChild(wrapperP);
-            list.appendChild(wrapperLi);
+            toast(config.noData);
         }
         setButtonsState(false);
         setSpinner(false);
@@ -166,10 +163,10 @@
         setSpinner(false);
         // if user has no internet connection
         if (errorStatus === 0) {
-            alert(config.checkNetworkOrCORS);
+            toast(config.checkNetworkOrCORS);
         } else {
             // if some other error happened
-            alert(config.errorOccurred);
+            toast(config.errorOccurred);
         }
     }
 
@@ -216,6 +213,14 @@
             // we set a message to user, and remove buttons from DOM
             warningGeolocation.innerHTML = config.geolocationNotSupported;
         }
+    }
+
+    function toast(message) {
+        toastMessage.innerHTML = message;
+        toastWrapper.setAttribute("style", "display: block;");
+        setTimeout(function() {
+            toastWrapper.setAttribute("style", "display: none;");
+        }, 3000);
     }
 
 

@@ -181,3 +181,21 @@ button {
       @include element-shadow;
   }
 }
+
+
+// toast
+.toast {
+  position: fixed;
+  top: $padding;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.5);
+  width: 550px;
+  max-width: 80%;
+  padding: $padding;
+  @include rounded-corner;
+  p {
+    color: $white;
+  }
+}
