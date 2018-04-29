@@ -19,16 +19,8 @@
     <section id="selected-airplane" class="hidden modal-container padding">
         <button id="close-airplane" class="closeBtn">X</button>
         <div class="modal fadein-and-move">
-            <h3>Manufacture: <span id="manufacture"></span></h3>
-            <h4>Model: <span id="model"></span></h4>
-            <hr>
-            <div class="m-t m-b">
-                <p>Destination: <span id="destination"></span></p>
-                <p>Flight origin airport: <span id="origin"></span></p>
-            </div>
-            <hr>
-            <div class="m-t m-b">
-                <img id="logo" onerror="this.src='images/noImage.png'" src="" />
+            <div id="airplane-data">
+                <!-- rendered from handlebars -->
             </div>
         </div>
     </section>
@@ -42,16 +34,19 @@
             <p class="warning-msg light" id="warning"> </p>
         </div>
         <div id="airplanes-container" class="hidden">
+            <p class="padding time-refreshed">Refreshed at: <span id="time"></span></p>
             <p class="list-heading">
                 <span class="icon-orientation">Direction</span>
                 <span class="altitude">Altitude</span>
                 <span class="long-text code-number">Flight code numbe</span>
             </p>
             <ul id='list' class="airplane-list">
+                <!-- rendered from handlebars -->
             </ul>
         </div>
     </section>
 
+    <!-- CSS animation -->
     <div class="airplane-animation">
         <img class="cloud cloud01" src="./images/cloud1.png" />
         <img class="cloud cloud02" src="./images/cloud2.png" />
@@ -65,10 +60,47 @@
     </div>
 
     <a class="git-link" target="_blank" href="https://github.com/wmiroslav/AirTraffic">Git repository</a>
+    
+
+
+    <!-- SELECTED AIRPLANE TEMPLATE -->
+    <script id="airplane-data-template" type="text/x-handlebars-template">
+        <h3>Manufacture: <span>{{Man}}</span></h3>
+        <h4>Model: <span>{{Mdl}}</span></h4>
+        <hr>
+        <div class="m-t m-b">
+            <p>Destination: <span>{{To}}</span></p>
+            <p>Flight origin airport: <span>{{From}}</span></p>
+        </div>
+        <hr>
+        <div class="m-t m-b">
+            <img id="logo" onerror="this.src='images/noImage.png'" src="{{logoUrl}}" />
+        </div>
+    </script>
+
+
+    <!-- AIRPLANE LIST TEMPLATES -->
+    <script id="list-template" type="text/x-handlebars-template">
+        {{#each airplanes}}
+        <li>
+            <p data-id={{Id}}>
+                <span class="icon-orientation {{#direction Brng}}east{{/direction}}"></span>
+                <span class="altitude">{{Alt}}</span>
+                <span class="code-number">{{CNum}}</span>
+            </p>
+        </li>
+        {{/each}}
+    </script>
+
+
+
     <script type="text/javascript" src="scripts/scripts.min.js"></script>
     <noscript>
-        <h1>Please, enable Javascipt.</h1>
+        <div class="toast">
+            <p class="center">Please, enable Javascipt.</p>
+        </div>
     </noscript>
+
 </body>
 
 </html>

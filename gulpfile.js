@@ -18,7 +18,7 @@ gulp.task('watch-sass', function(){
 
 // js
 gulp.task('scripts', function() {
-    gulp.src(['./config.js', './scripts/helpers.js', './scripts/main.js'])
+    gulp.src(['./node_modules/handlebars/dist/handlebars.js', './config.js', './scripts/helpers.js', './scripts/main.js'])
       .pipe(concat('scripts.min.js'))
       .pipe(uglify())
       .pipe(gulp.dest('./scripts'))

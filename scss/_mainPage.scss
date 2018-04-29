@@ -7,6 +7,13 @@
 .title {
     color: white;
 }
+.time-refreshed {
+    font-size: .9em;
+    color: white;
+    span {
+        color: white;
+    }
+}
 
 /////////////////
 // question
@@ -66,7 +73,7 @@
     .icon-orientation {
         width: 100px;
         height: 55px;
-        &.west:after, &.east:after {
+        &:after {
             @extend .fadein;
             content: url('../images/orientation.png');
             display: block;
@@ -90,6 +97,13 @@
     font-weight: bold;
     span {
         color: white !important;
+    }
+    .icon-orientation {
+        width: 100px;
+        height: 55px;
+        &:after {
+            content: "";
+        }
     }
 }
 

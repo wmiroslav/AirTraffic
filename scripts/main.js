@@ -3,17 +3,27 @@
 
 (function() {
 
+    Handlebars.registerHelper('direction', function(angle) {
+        var iconClass;
+        if (angle > 0 && angle < 180) {
+            iconClass = 'east';
+        } else {
+            iconClass = 'west';
+        }
+        return iconClass;
+    });
+
     var airplanes;
     var userPosition;
     var geolocationAllowBtn = document.getElementById('allowLocation');
     var geolocationDeniedBtn = document.getElementById('deniedLocation');
     var warningGeolocation = document.getElementById('warning');
-    var list = document.getElementById('list');
     var loadingSpinner = document.getElementById('loading-spinner');
     var singleAirplane = document.getElementById('selected-airplane');
     var toastMessage = document.getElementById('toast');
     var toastWrapper = document.getElementById('toast-wrapper');
     toastWrapper.setAttribute("style", "display: none");
+    var refreshedTime = document.getElementById('time');
     // for selected airplane
     var closeBtn = document.getElementById('close-airplane');
     var manufacture = document.getElementById('manufacture');
@@ -21,6 +31,11 @@
     var destination = document.getElementById('destination');
     var origin = document.getElementById('origin');
     var logo = document.getElementById('logo');
+    //templates and template holders
+    var listTemplate = document.getElementById("list-template");
+    var airplaneDataTemplate = document.getElementById("airplane-data-template");
+    var list = document.getElementById('list');
+    var airplaneData = document.getElementById('airplane-data');
 
 
 
@@ -82,24 +97,11 @@
     }
 
 
-    // calculate icon orientation - icon class
-    function getIconOrientation(angle) {
-        var iconClass;
-        if (angle > 0 && angle < 180) {
-            iconClass = 'west';
-        } else {
-            iconClass = 'east';
-        }
-        return iconClass;
-    }
-
-
-
 
 
     function closeModal() {
         singleAirplane.setAttribute("style", "display: none;");
-        window.location.hash = '';
+        window.location.hash = 'airplanes';
     }
     singleAirplane.addEventListener('click', function(e){
         if (e.target.id == 'selected-airplane') {
@@ -120,37 +122,16 @@
         airplanes = response.acList.sortBy("Alt");
         var numberOfNewAirplanes = airplanes.length;
         if (numberOfNewAirplanes > 0) {
-            for (var i = 0; i < numberOfNewAirplanes; i++) {
-                // create wrapper/row for airplane
-                var wrapperLi = document.createElement("li");
-                
-                // create heading wrapper 
-                var wrapperP = document.createElement("p");
-                wrapperP.setAttribute("data-id", airplanes[i].Id);
-
-
-                // add element for icon orientation
-                var iconEl = document.createElement("span");
-                iconEl.classList.add("icon-orientation");
-                iconEl.classList.add(getIconOrientation(airplanes[i].Brng));
-
-                // add element for altitude
-                var altitudeEl = document.createElement("span");
-                altitudeEl.innerHTML = airplanes[i].Alt || config.noData;
-                altitudeEl.classList.add("altitude");
-
-                // add element for code number
-                var codeNumberEl = document.createElement("span");
-                codeNumberEl.innerHTML = airplanes[i].CNum || config.noData;
-                codeNumberEl.classList.add("code-number");
-
-                // add new elements to DOM
-                wrapperP.appendChild(iconEl);
-                wrapperP.appendChild(altitudeEl);
-                wrapperP.appendChild(codeNumberEl);
-                wrapperLi.appendChild(wrapperP);
-                list.appendChild(wrapperLi);
-            }
+            // set refreshed time
+            var d = new Date(); 
+            refreshedTime.innerHTML = d.getHours() + "h " + d.getMinutes() + "min " + d.getSeconds()  + "s" ;
+            // set results to DOM via Handlebars js:
+            var html = listTemplate.innerHTML;
+            var template = Handlebars.compile(html);
+            var newHtml = template({
+                airplanes: airplanes
+            })
+            list.innerHTML = newHtml;
         } else {
             toast(config.noData);
         }
@@ -241,18 +222,23 @@
             // SHOW selecterd airplane
             if (selectedAirplane && singleAirplane) {
                 singleAirplane.setAttribute("style", "display: block;");
-                console.log(selectedAirplane);
-                manufacture.innerHTML = selectedAirplane.Man || config.noData;
-                model.innerHTML = selectedAirplane.Mdl || config.noData;
-                origin.innerHTML = selectedAirplane.From || config.noData;
-                destination.innerHTML = selectedAirplane.To || config.noData;
-        
+
+                // some airplanes has no data, so instead od undefined, show nicer message in UI
+                selectedAirplane.Man = selectedAirplane.Man || config.noData;
+                selectedAirplane.Mdl = selectedAirplane.Mdl || config.noData;
+                selectedAirplane.From = selectedAirplane.From || config.noData;
+                selectedAirplane.To = selectedAirplane.To || config.noData;
+                // generate icon logo URL
                 if(selectedAirplane.Op) {
                     var genericUrl = selectedAirplane.Op.replace(/\s/g, '') + ".com";
                     var logoUrl = config.logoBaseUrl + (config.logo[selectedAirplane.Op] || genericUrl);
-                    logo.src = logoUrl;
+                    selectedAirplane.logoUrl = logoUrl;
                 }
-                
+                // render it to the DOM via Handlebarsjs
+                var html = airplaneDataTemplate.innerHTML;
+                var template = Handlebars.compile(html);
+                var newHtml = template(selectedAirplane);
+                airplaneData.innerHTML = newHtml;
             } else {
                 closeModal();
             }
@@ -274,7 +260,7 @@
    
 
 
-    getAirplaneData(); //on init get data, for now it's pointless, because we don't store our geolocation and last results in local storage...
+    getAirplaneData(); //on init get data... for now it's pointless, because we don't store our geolocation and last results in local storage...
                         // so we could use: window.location.hash = ''; just to clean hash value...
 })()
 
