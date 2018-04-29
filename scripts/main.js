@@ -142,13 +142,7 @@
     // get data failed
     function onErrorGetData(errorStatus) {
         setSpinner(false);
-        // if user has no internet connection
-        if (errorStatus === 0) {
-            toast(config.checkNetworkOrCORS);
-        } else {
-            // if some other error happened
-            toast(config.errorOccurred);
-        }
+        toast(config.checkNetworkOrCORS);
     }
 
     // set is loading to update UI - disable buttons

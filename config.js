@@ -14,7 +14,6 @@ var config = {
     baseUrl: "https://public-api.adsbexchange.com/VirtualRadar/",
     logoBaseUrl: "https://logo.clearbit.com/",
     checkNetworkOrCORS: "Check your internet connection, and enable CORS in your browser.",
-    errorOccurred: "An error occurred. Please try searching again.",
     onErrorGetLocation: "Make sure you enabled usage of your geolocation. If you disabled it before, please clear browser settings in browsers top right corner, and try again.",
     noInternet: "Check yout internet connection.",
     logo: { // exections for logo paths
