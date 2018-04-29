@@ -29,6 +29,5 @@ gulp.task('watch-js', function(){
 
 
 // 
-gulp.task('build', ['sass', 'scripts']);
-gulp.task('default', ['sass', 'watch-sass', 'scripts', 'watch-js']);
-
+gulp.task('watch', ['sass', 'watch-sass', 'scripts', 'watch-js']);
+gulp.task('default', ['sass', 'scripts']);

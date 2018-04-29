@@ -18,7 +18,7 @@ function httpGetAsync(url, successCallback, errorCallback) {
             if(xmlHttp.status == 200) {
                 successCallback(JSON.parse(xmlHttp.responseText));
             } else {
-                errorCallback(xmlHttp.status);
+                errorCallback(xmlHttp);
             }
         }
     }

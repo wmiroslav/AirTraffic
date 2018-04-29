@@ -187,13 +187,22 @@
     // on error get users location.
     // user denied to use geolocation, or some other unknown error...
     function onErrorGetLocation(error) {
+        console.log(error);
         setButtonsState(false);
-        if(error.code === 2) {
-            alert(config.checkNetworkOrCORS);
-        } else {
-            // if user clock geolocation
+        // on local machine, browser do not remember if user allow or denied a geolocation
+        // so in case that site is on live server, browser remember his decision
+        // in that case, user need to clear browser setting - so wee send him a different message
+        if (window.location.protocol === "file:") {
             locationDenied();
+        } else {
+            if (error.code === 2) {
+                warningGeolocation.innerHTML = config.onErrorGetLocation + " " + config.noInternet;
+            } else {
+                warningGeolocation.innerHTML = config.onErrorGetLocation;
+            }
+            warningGeolocation.classList.add('fadein');
         }
+        
     }
 
     // get users geolocation
